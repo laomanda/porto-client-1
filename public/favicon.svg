@@ -1,0 +1,24 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="64"
+  height="64"
+  viewBox="0 0 64 64"
+  fill="none"
+>
+  <rect x="6" y="6" width="52" height="52" rx="14" fill="#0f3d3a" />
+  <rect x="18" y="14" width="9" height="36" rx="4.5" fill="#f7f3eb" />
+  <path
+    fill="#f7f3eb"
+    fill-rule="evenodd"
+    d="M25 14h9.5c5.523 0 10 4.477 10 10s-4.477 10-10 10H25V14Zm5 6v8h4.25a4 4 0 1 0 0-8H30Z"
+    clip-rule="evenodd"
+  />
+  <path
+    fill="#f7f3eb"
+    fill-rule="evenodd"
+    d="M25 30h10.5C41.299 30 46 34.701 46 40.5S41.299 51 35.5 51H25V30Zm5 6v9h4.75a4.5 4.5 0 1 0 0-9H30Z"
+    clip-rule="evenodd"
+  />
+  <rect x="24.5" y="25" width="8.5" height="4" rx="2" fill="#c8a96b" />
+  <rect x="24.5" y="38" width="9.25" height="4" rx="2" fill="#c8a96b" />
+</svg>
