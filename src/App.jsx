@@ -4,6 +4,7 @@ import AboutSection from "./components/sections/AboutSection";
 import ExpertiseSection from "./components/sections/ExpertiseSection";
 import ExperienceSection from "./components/sections/ExperienceSection";
 import StatsSection from "./components/sections/StatsSection";
+import ProductSection from "./components/sections/ProductSection";
 import CTASection from "./components/sections/CTASection";
 import Footer from "./components/sections/Footer";
 
@@ -18,6 +19,7 @@ export default function App() {
           <ExpertiseSection />
           <ExperienceSection />
           <StatsSection />
+          <ProductSection />
           <CTASection />
         </div>
       </main>

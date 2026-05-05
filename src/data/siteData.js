@@ -77,4 +77,28 @@ export const siteData = {
       desc: "Berperan dalam pengajaran, pelatihan, serta pengelolaan dan pengembangan program pendidikan dengan pendekatan yang terstruktur dan berorientasi pada hasil.",
     },
   ],
+
+  products: [
+    {
+      id: 1,
+      title: "Tahsin Al Qur'an",
+      price: 29000,
+      description: "Program pembelajaran Tahsin Al Qur'an dengan metode yang terstruktur dan berpengalaman untuk meningkatkan kualitas bacaan Qur'an Anda.",
+      icon: "book",
+    },
+    {
+      id: 2,
+      title: "Learning Arabic",
+      price: 49000,
+      description: "Kursus Bahasa Arab intensif yang dirancang untuk berbagai level, dari pemula hingga menengah dengan pendekatan praktis dan aplikatif.",
+      icon: "language",
+    },
+    {
+      id: 3,
+      title: "Spirituality in Work",
+      price: 49000,
+      description: "Program pengembangan diri yang mengintegrasikan spiritualitas dalam konteks pekerjaan untuk keseimbangan hidup yang lebih bermakna.",
+      icon: "meditation",
+    },
+  ],
 };
