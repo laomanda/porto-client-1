@@ -17,8 +17,6 @@ import { siteData } from "../../data/siteData";
 
 const NAV_OBSERVER_MARGIN = "-35% 0px -45% 0px";
 const NAV_OBSERVER_THRESHOLDS = [0, 0.15, 0.3, 0.45, 0.6];
-const NAV_ICON_SIZE = 15;
-const NAV_ICON_STROKE_WIDTH = 1.9;
 const noop = () => {};
 
 const navItems = [
@@ -42,19 +40,6 @@ const navItems = [
   },
 ];
 
-function WaveLayer({ className, path, fill }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 1440 220"
-      preserveAspectRatio="none"
-      aria-hidden="true"
-      role="presentation"
-    >
-      <path d={path} fill={fill} />
-    </svg>
-  );
-}
 
 function BrandMonogram() {
   return (
@@ -80,7 +65,7 @@ function BrandMonogram() {
   );
 }
 
-export default function Navbar() {
+export default function Navbar({ onHomeClick }) {
   const [activeSection, setActiveSection] = useState(navItems[0].sectionId);
   const [sliderStyle, setSliderStyle] = useState({
     left: 0,
@@ -108,6 +93,7 @@ export default function Navbar() {
   });
 
   const handleNavItemClick = (sectionId) => {
+    if (onHomeClick) onHomeClick();
     startTransition(() => {
       setActiveSection((current) =>
         current === sectionId ? current : sectionId,
@@ -260,63 +246,33 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="sticky top-3 z-50 px-3 sm:top-4 sm:px-0">
-      <Container className="relative">
-        <div className="navbar-shell">
+    <header className="sticky top-4 z-50 px-4 sm:px-6">
+      <Container className="flex justify-center">
+        <div className="navbar-shell w-full max-w-5xl">
           <div className="navbar-shell-overlay" />
-          <div className="absolute inset-x-0 bottom-0 h-24 overflow-hidden pointer-events-none">
-            <WaveLayer
-              className="navbar-wave navbar-wave-primary navbar-wave-primary-layer"
-              fill="rgba(15, 61, 58, 0.1)"
-              path="M0 120L40 112C80 104 160 88 240 82.7C320 77 400 83 480 101.3C560 120 640 152 720 157.3C800 163 880 141 960 117.3C1040 93 1120 67 1200 58.7C1280 51 1360 61 1400 66.7L1440 72V220H1400C1360 220 1280 220 1200 220C1120 220 1040 220 960 220C880 220 800 220 720 220C640 220 560 220 480 220C400 220 320 220 240 220C160 220 80 220 40 220H0Z"
-            />
-            <WaveLayer
-              className="navbar-wave navbar-wave-secondary navbar-wave-secondary-layer"
-              fill="rgba(200, 169, 107, 0.16)"
-              path="M0 144L34.3 136C68.6 128 137 112 206 109.3C274.3 107 343 117 411 128C480 139 549 149 617 144C685.7 139 754 117 823 96C891.4 75 960 53 1029 58.7C1097.1 64 1166 96 1234 114.7C1302.9 133 1371 139 1406 141.3L1440 144V220H1406C1371 220 1303 220 1234 220C1166 220 1097 220 1029 220C960 220 891 220 823 220C754 220 686 220 617 220C549 220 480 220 411 220C343 220 274 220 206 220C137 220 69 220 34 220H0Z"
-            />
-          </div>
 
-          <div className="relative flex flex-col gap-3 px-3 py-3 sm:gap-4 sm:px-6 sm:py-4 lg:px-8">
-            <div className="flex items-center justify-between">
-              <div className="flex min-w-0 items-center gap-3 sm:gap-4">
-                <BrandMonogram />
-                <div className="min-w-0 hidden sm:block">
-                  <h1 className="navbar-brand-title">
-                    {siteData.brand.name}
-                  </h1>
-                </div>
+          <div className="relative flex items-center justify-between px-3 py-2 sm:px-4 lg:px-6">
+            {/* Left: Brand */}
+            <button 
+              onClick={onHomeClick}
+              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+            >
+              <BrandMonogram />
+              <div className="hidden md:block text-left">
+                <h1 className="navbar-brand-title">
+                  {siteData.brand.name}
+                </h1>
               </div>
+            </button>
 
-              <div className="flex items-center gap-3 shrink-0">
-                <a
-                  href={siteData.brand.whatsappLink}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="navbar-cta group"
-                >
-                  <MessageCircle
-                    size={NAV_ICON_SIZE + 1}
-                    strokeWidth={NAV_ICON_STROKE_WIDTH}
-                    aria-hidden="true"
-                  />
-                  <span className="hidden sm:inline">Konsultasi</span>
-                  <ArrowUpRight
-                    size={NAV_ICON_SIZE + 1}
-                    className="navbar-cta-arrow"
-                  />
-                </a>
-              </div>
-            </div>
-
-            {/* Desktop segmented nav */}
-            <nav className="hidden md:flex justify-center mt-3">
+            {/* Center: Desktop Nav */}
+            <nav className="hidden lg:flex items-center">
               <div
                 ref={railRef}
-                className="navbar-segmented relative inline-flex items-center gap-1 rounded-full p-1.5"
+                className="navbar-segmented relative flex items-center gap-1 p-1"
               >
                 <div
-                  className="navbar-segmented-slider pointer-events-none absolute inset-y-1.5 rounded-full"
+                  className="navbar-segmented-slider pointer-events-none absolute inset-y-1 rounded-full"
                   style={{
                     width: `${sliderStyle.width}px`,
                     transform: `translateX(${sliderStyle.left}px)`,
@@ -330,9 +286,6 @@ export default function Navbar() {
                     ref={(node) => setItemRef(item.sectionId, node)}
                     href={item.href}
                     onClick={() => handleNavItemClick(item.sectionId)}
-                    aria-current={
-                      activeSection === item.sectionId ? "page" : undefined
-                    }
                     className={`navbar-segmented-link ${
                       activeSection === item.sectionId
                         ? "navbar-segmented-link-active"
@@ -340,39 +293,73 @@ export default function Navbar() {
                     }`}
                   >
                     <item.icon
-                      size={NAV_ICON_SIZE}
-                      strokeWidth={NAV_ICON_STROKE_WIDTH}
+                      size={14}
+                      strokeWidth={2}
                       className="shrink-0"
-                      aria-hidden="true"
                     />
-                    {item.label}
+                    <span className="hidden xl:inline">{item.label}</span>
                   </a>
                 ))}
               </div>
             </nav>
 
-            {/* Mobile chips nav */}
-            <div className="flex gap-2 overflow-x-auto pb-1 md:hidden" style={{ WebkitOverflowScrolling: 'touch' }}>
+            {/* Right: CTA & Mobile Nav */}
+            <div className="flex items-center gap-2 sm:gap-3">
+              {/* Desktop Nav for Medium screens (tablet) */}
+              <nav className="hidden md:flex lg:hidden items-center mr-2">
+                <div className="flex gap-1">
+                  {navItems.map((item) => (
+                    <a
+                      key={item.sectionId}
+                      href={item.href}
+                      onClick={() => handleNavItemClick(item.sectionId)}
+                      className={`p-2 rounded-full transition-colors ${
+                        activeSection === item.sectionId
+                          ? "bg-brand-green/10 text-brand-green"
+                          : "text-brand-muted hover:bg-brand-green/5"
+                      }`}
+                      title={item.label}
+                    >
+                      <item.icon size={18} strokeWidth={2} />
+                    </a>
+                  ))}
+                </div>
+              </nav>
+
+              <a
+                href={siteData.brand.whatsappLink}
+                target="_blank"
+                rel="noreferrer"
+                className="navbar-cta group"
+              >
+                <MessageCircle
+                  size={16}
+                  strokeWidth={2}
+                  className="shrink-0"
+                />
+                <span className="hidden sm:inline">Konsultasi</span>
+                <ArrowUpRight
+                  size={14}
+                  className="navbar-cta-arrow hidden sm:block"
+                />
+              </a>
+            </div>
+          </div>
+
+          {/* Mobile Bottom Nav (Compact Chips) */}
+          <div className="md:hidden border-t border-brand-green/5 px-4 py-2">
+            <div className="flex gap-2 overflow-x-auto no-scrollbar" style={{ WebkitOverflowScrolling: 'touch' }}>
               {navItems.map((item) => (
                 <a
                   key={item.sectionId}
                   href={item.href}
                   onClick={() => handleNavItemClick(item.sectionId)}
-                  aria-current={
-                    activeSection === item.sectionId ? "page" : undefined
-                  }
-                  className={`navbar-mobile-chip flex-1 whitespace-nowrap text-center text-xs sm:text-sm ${
+                  className={`flex-1 min-w-[90px] py-1.5 rounded-full text-center text-xs font-medium transition-all ${
                     activeSection === item.sectionId
-                      ? "navbar-mobile-chip-active"
-                      : "navbar-mobile-chip-inactive"
+                      ? "bg-brand-green text-white shadow-sm"
+                      : "bg-white/50 text-brand-muted"
                   }`}
                 >
-                  <item.icon
-                    size={NAV_ICON_SIZE - 1}
-                    strokeWidth={NAV_ICON_STROKE_WIDTH}
-                    className="mr-1 inline-block align-[-2px]"
-                    aria-hidden="true"
-                  />
                   {item.label}
                 </a>
               ))}

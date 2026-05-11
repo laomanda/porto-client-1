@@ -10,7 +10,7 @@ const iconMap = {
   meditation: Lightbulb,
 };
 
-export default function ProductSection() {
+export default function ProductSection({ onProductClick }) {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -61,7 +61,8 @@ export default function ProductSection() {
               <motion.div
                 key={product.id}
                 variants={itemVariants}
-                className="group h-full"
+                className="group h-full cursor-pointer"
+                onClick={() => onProductClick(product.id)}
               >
                 <div className="relative h-full rounded-2xl border border-white/8 bg-gradient-to-br from-white/5 to-white/2 backdrop-blur-sm p-7 transition-all duration-400 hover:border-brand-gold/20 hover:bg-gradient-to-br hover:from-white/8 hover:to-white/4 hover:-translate-y-1 flex flex-col overflow-hidden">
                   
@@ -106,7 +107,13 @@ export default function ProductSection() {
                     </div>
 
                     {/* CTA Button */}
-                    <button className="relative flex-shrink-0 px-5 py-2 rounded-lg bg-white/8 border border-white/15 text-xs font-semibold uppercase tracking-[0.08em] text-white/80 transition-all duration-300 hover:bg-white/12 hover:border-brand-gold/30 hover:text-white group/btn">
+                    <button 
+                      className="relative flex-shrink-0 px-5 py-2 rounded-lg bg-white/8 border border-white/15 text-xs font-semibold uppercase tracking-[0.08em] text-white/80 transition-all duration-300 hover:bg-white/12 hover:border-brand-gold/30 hover:text-white group/btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onProductClick(product.id);
+                      }}
+                    >
                       Daftar
                     </button>
                   </div>

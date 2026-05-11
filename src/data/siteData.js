@@ -83,21 +83,42 @@ export const siteData = {
       id: 1,
       title: "Tahsin Al Qur'an",
       price: 29000,
-      description: "Program pembelajaran Tahsin Al Qur'an dengan metode yang terstruktur dan berpengalaman untuk meningkatkan kualitas bacaan Qur'an Anda.",
+      description: "Program pembelajaran Tahsin Al Qur'an dengan metode yang terstruktur.",
+      fullDescription: "Program intensif yang dirancang untuk memperbaiki makhraj, tajwid, dan kelancaran membaca Al-Qur'an melalui bimbingan personal yang mendalam.",
+      benefits: [
+        "Perbaikan makhraj huruf secara detail",
+        "Pemahaman hukum tajwid praktis",
+        "Sertifikat penyelesaian program",
+        "Sesi konsultasi privat via WhatsApp"
+      ],
       icon: "book",
     },
     {
       id: 2,
       title: "Learning Arabic",
       price: 49000,
-      description: "Kursus Bahasa Arab intensif yang dirancang untuk berbagai level, dari pemula hingga menengah dengan pendekatan praktis dan aplikatif.",
+      description: "Kursus Bahasa Arab intensif yang dirancang untuk berbagai level.",
+      fullDescription: "Kuasai dasar-dasar bahasa Arab mulai dari kosakata harian hingga pemahaman struktur kalimat dasar untuk percakapan dan literatur Islam.",
+      benefits: [
+        "Metode pembelajaran cepat & mudah",
+        "E-book materi eksklusif",
+        "Grup diskusi interaktif",
+        "Latihan percakapan harian"
+      ],
       icon: "language",
     },
     {
       id: 3,
       title: "Spirituality in Work",
       price: 49000,
-      description: "Program pengembangan diri yang mengintegrasikan spiritualitas dalam konteks pekerjaan untuk keseimbangan hidup yang lebih bermakna.",
+      description: "Program pengembangan diri yang mengintegrasikan spiritualitas dalam pekerjaan.",
+      fullDescription: "Temukan kedamaian dan makna dalam aktivitas profesional Anda dengan menyelaraskan nilai-nilai spiritualitas ke dalam etos kerja harian.",
+      benefits: [
+        "Teknik manajemen stres spiritual",
+        "Panduan etos kerja Islami",
+        "Rekaman sesi mindfulness",
+        "Networking dengan profesional sevisi"
+      ],
       icon: "meditation",
     },
   ],
